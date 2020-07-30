@@ -5,6 +5,8 @@ const items = require('./db/items');
 
 app.use(bodyParser.json());
 
+app.patch('/item/:id', items.restoreItem);
+app.delete('/item/:id', items.deleteItem);
 app.put('/item/:id', items.updateExistingItem);
 app.post('/item', items.createNewItem);
 app.get('/item/:id', items.getSingleItem);

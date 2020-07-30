@@ -9,8 +9,8 @@ const pool = new Pool({
 });
 
 
-let checkIfUserExistsForId = (itemId, callback)=>{
-    pool.query('Select * from items where id=$1', [itemId], (error, result)=>{
+let checkIfItemExistsForId = (itemId, callback)=>{
+    pool.query('Select * from items where id=$1 and is_active=true', [itemId], (error, result)=>{
         if(error){
             throw error;
         }else if (result.rows.length > 0){
@@ -43,7 +43,7 @@ let checkIfItemNameAndModelExists = (nameModel, callback)=>{
 };
 
 let getAllItems = (request, response) =>{
-    pool.query('Select * from items', (error, result) => {
+    pool.query('Select * from items where is_active=true', (error, result) => {
         if (error){
             throw error;
         }
@@ -58,7 +58,7 @@ let getAllItems = (request, response) =>{
 
 let getSingleItem = (request, response) => {
     let itemId = request.params.id;
-    checkIfUserExistsForId(itemId, (result)=>{
+    checkIfItemExistsForId(itemId, (result)=>{
         if (result.error){
             response.status(404).json({response: result.result});
         }
@@ -99,9 +99,20 @@ let createNewItem = (request, response) => {
     });
 };
 
+let deleteItem = (request, response)=> {
+    itemId = request.params.id;
+    pool.query('update items set is_active=false and last_updated_at=$2 where id=$1', [itemId, new Date()], (error, result)=>{
+        if(error){
+            throw error;
+        }
+        else{
+            response.status(200).json({response: 'Item successfully removed.'});
+        }
+    });
+};
 let updateExistingItem = (request, response) => {
     let itemId = request.params.id;
-    checkIfUserExistsForId(itemId, (res) => {
+    checkIfItemExistsForId(itemId, (res) => {
         if(res.error){
             response.status(404).json({response: res.result});
         }
@@ -132,9 +143,29 @@ let updateExistingItem = (request, response) => {
     });
 };
 
+let restoreItem = (request, response)=>{
+    let itemId = request.params.id;
+    checkIfItemExistsForId(itemId, (res) => {
+        if (!res.error){
+            console.log(res.result);
+            response.status(400).json({response: 'Item is already active.'});
+        }else{
+            pool.query('update items set is_active=true, last_updated_at=$2 where id=$1', [itemId, new Date()], (error, result)=>{
+                if (error){
+                    throw error;
+                }
+                else {
+                    response.status(200).json({response: 'Item restored successfully.'});
+                }
+            });
+        }
+    });
+};
 module.exports = {
     getAllItems,
     createNewItem,
     updateExistingItem,
-    getSingleItem
+    getSingleItem,
+    deleteItem,
+    restoreItem
 }
