@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "3b432d7f-9906-44a5-ba54-76523b15e9cc",
+		"name": "Express-Item-APIs",
+		"description": "Basic JSON CRUD APIs written in Node, Express and PostgreSQL.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8c944f58-d817-45d6-a7d6-480e05f5ff56",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODg3MTgwMzcsIm5iZiI6MTU4ODcxODAzNywianRpIjoiMWQxZDUzZjYtNjY1OC00MDkzLWFiOGUtNjhlY2U3NDNiMjUwIiwiZXhwIjoxNTg4NzIxNjM3LCJpZGVudGl0eSI6eyJpZCI6IjVlYWY0ZGM5NDY5YThjYzYyZGU0ZTBhMyIsImZpcnN0X25hbWUiOiJWZWVzaCIsImxhc3RfbmFtZSI6IkRvZ3JhIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTctMTAtMTMgMTA6NTM6NTMiLCJlbWFpbCI6ImFkbWluZXJAYWRtaW5lci5jb20iLCJwaG9uZV9udW1iZXIiOjk4OTg4ODg4NzgsInVzZXJuYW1lIjoiYWRtaW5lciIsImlzX2FjdGl2ZSI6dHJ1ZSwiY3JlYXRlZF9hdCI6IjIwMjAtMDUtMDQgMDQ6MzM6MzcuMjU4MDAwIiwicGFzc3dvcmQiOiIwODFhODQxZmNkZTA0MWJkNzQzY2U1N2RiYzU3ODA1MDZiNzg4OGNjMTQxZTM4OWYxNDExNDFmNzQ4NDljMDBkIiwiaXNfYWRtaW4iOmZhbHNlLCJmYXZfYm9va3MiOltdLCJhdXRob3JlZF9ib29rcyI6W119LCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.K_ATM8igbfBvpEHOtRytqYtKYj8SS4f1EJ2zoKadkUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Poster\",\n\t\"model\": \"A1\",\n\t\"price\": 400\n}"
+				},
+				"url": {
+					"raw": "{{url}}/item",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"item"
+					]
+				},
+				"description": "Create a new item.\r\n\r\nRequest payload:\r\n\r\n{\r\n    \"name\": <>,\r\n    \"price\": <>,\r\n    \"model\": <>\r\n}\r\n\r\nAll fields are mandatory."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete item to inactive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c54eb6ce-87d4-4da5-97ec-dbdce74a9c15",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODg3MTgwMzcsIm5iZiI6MTU4ODcxODAzNywianRpIjoiMWQxZDUzZjYtNjY1OC00MDkzLWFiOGUtNjhlY2U3NDNiMjUwIiwiZXhwIjoxNTg4NzIxNjM3LCJpZGVudGl0eSI6eyJpZCI6IjVlYWY0ZGM5NDY5YThjYzYyZGU0ZTBhMyIsImZpcnN0X25hbWUiOiJWZWVzaCIsImxhc3RfbmFtZSI6IkRvZ3JhIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTctMTAtMTMgMTA6NTM6NTMiLCJlbWFpbCI6ImFkbWluZXJAYWRtaW5lci5jb20iLCJwaG9uZV9udW1iZXIiOjk4OTg4ODg4NzgsInVzZXJuYW1lIjoiYWRtaW5lciIsImlzX2FjdGl2ZSI6dHJ1ZSwiY3JlYXRlZF9hdCI6IjIwMjAtMDUtMDQgMDQ6MzM6MzcuMjU4MDAwIiwicGFzc3dvcmQiOiIwODFhODQxZmNkZTA0MWJkNzQzY2U1N2RiYzU3ODA1MDZiNzg4OGNjMTQxZTM4OWYxNDExNDFmNzQ4NDljMDBkIiwiaXNfYWRtaW4iOmZhbHNlLCJmYXZfYm9va3MiOltdLCJhdXRob3JlZF9ib29rcyI6W119LCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.K_ATM8igbfBvpEHOtRytqYtKYj8SS4f1EJ2zoKadkUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/item/18",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"item",
+						"18"
+					]
+				},
+				"description": "Delete item by id."
+			},
+			"response": []
+		},
+		{
+			"name": "Restore item to active",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "831dda2b-a57d-4280-adb2-a590c98cbd0f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODg3MTgwMzcsIm5iZiI6MTU4ODcxODAzNywianRpIjoiMWQxZDUzZjYtNjY1OC00MDkzLWFiOGUtNjhlY2U3NDNiMjUwIiwiZXhwIjoxNTg4NzIxNjM3LCJpZGVudGl0eSI6eyJpZCI6IjVlYWY0ZGM5NDY5YThjYzYyZGU0ZTBhMyIsImZpcnN0X25hbWUiOiJWZWVzaCIsImxhc3RfbmFtZSI6IkRvZ3JhIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTctMTAtMTMgMTA6NTM6NTMiLCJlbWFpbCI6ImFkbWluZXJAYWRtaW5lci5jb20iLCJwaG9uZV9udW1iZXIiOjk4OTg4ODg4NzgsInVzZXJuYW1lIjoiYWRtaW5lciIsImlzX2FjdGl2ZSI6dHJ1ZSwiY3JlYXRlZF9hdCI6IjIwMjAtMDUtMDQgMDQ6MzM6MzcuMjU4MDAwIiwicGFzc3dvcmQiOiIwODFhODQxZmNkZTA0MWJkNzQzY2U1N2RiYzU3ODA1MDZiNzg4OGNjMTQxZTM4OWYxNDExNDFmNzQ4NDljMDBkIiwiaXNfYWRtaW4iOmZhbHNlLCJmYXZfYm9va3MiOltdLCJhdXRob3JlZF9ib29rcyI6W119LCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.K_ATM8igbfBvpEHOtRytqYtKYj8SS4f1EJ2zoKadkUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/item/18",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"item",
+						"18"
+					]
+				},
+				"description": "Restore item by id."
+			},
+			"response": []
+		},
+		{
+			"name": "update active item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e207d94-671e-41b3-8a97-b3afd3564e13",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODg3MTgwMzcsIm5iZiI6MTU4ODcxODAzNywianRpIjoiMWQxZDUzZjYtNjY1OC00MDkzLWFiOGUtNjhlY2U3NDNiMjUwIiwiZXhwIjoxNTg4NzIxNjM3LCJpZGVudGl0eSI6eyJpZCI6IjVlYWY0ZGM5NDY5YThjYzYyZGU0ZTBhMyIsImZpcnN0X25hbWUiOiJWZWVzaCIsImxhc3RfbmFtZSI6IkRvZ3JhIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTctMTAtMTMgMTA6NTM6NTMiLCJlbWFpbCI6ImFkbWluZXJAYWRtaW5lci5jb20iLCJwaG9uZV9udW1iZXIiOjk4OTg4ODg4NzgsInVzZXJuYW1lIjoiYWRtaW5lciIsImlzX2FjdGl2ZSI6dHJ1ZSwiY3JlYXRlZF9hdCI6IjIwMjAtMDUtMDQgMDQ6MzM6MzcuMjU4MDAwIiwicGFzc3dvcmQiOiIwODFhODQxZmNkZTA0MWJkNzQzY2U1N2RiYzU3ODA1MDZiNzg4OGNjMTQxZTM4OWYxNDExNDFmNzQ4NDljMDBkIiwiaXNfYWRtaW4iOmZhbHNlLCJmYXZfYm9va3MiOltdLCJhdXRob3JlZF9ib29rcyI6W119LCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.K_ATM8igbfBvpEHOtRytqYtKYj8SS4f1EJ2zoKadkUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Por\",\n\t\"model\": \"L0\",\n\t\"price\": 900\n}\n"
+				},
+				"url": {
+					"raw": "{{url}}/item/18",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"item",
+						"18"
+					]
+				},
+				"description": "Update item by id.\r\n\r\nRequest payload:\r\n\r\n{\r\n    \"name\": <>,\r\n    \"price\": <>,\r\n    \"model\": <>\r\n}\r\n\r\nAll fields are optional."
+			},
+			"response": []
+		},
+		{
+			"name": "Get single active item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d7c0bbc1-2c41-4eaf-8ea9-e5f9f2ad2bbf",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODg3MTgwMzcsIm5iZiI6MTU4ODcxODAzNywianRpIjoiMWQxZDUzZjYtNjY1OC00MDkzLWFiOGUtNjhlY2U3NDNiMjUwIiwiZXhwIjoxNTg4NzIxNjM3LCJpZGVudGl0eSI6eyJpZCI6IjVlYWY0ZGM5NDY5YThjYzYyZGU0ZTBhMyIsImZpcnN0X25hbWUiOiJWZWVzaCIsImxhc3RfbmFtZSI6IkRvZ3JhIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTctMTAtMTMgMTA6NTM6NTMiLCJlbWFpbCI6ImFkbWluZXJAYWRtaW5lci5jb20iLCJwaG9uZV9udW1iZXIiOjk4OTg4ODg4NzgsInVzZXJuYW1lIjoiYWRtaW5lciIsImlzX2FjdGl2ZSI6dHJ1ZSwiY3JlYXRlZF9hdCI6IjIwMjAtMDUtMDQgMDQ6MzM6MzcuMjU4MDAwIiwicGFzc3dvcmQiOiIwODFhODQxZmNkZTA0MWJkNzQzY2U1N2RiYzU3ODA1MDZiNzg4OGNjMTQxZTM4OWYxNDExNDFmNzQ4NDljMDBkIiwiaXNfYWRtaW4iOmZhbHNlLCJmYXZfYm9va3MiOltdLCJhdXRob3JlZF9ib29rcyI6W119LCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.K_ATM8igbfBvpEHOtRytqYtKYj8SS4f1EJ2zoKadkUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Por\",\n\t\"model\": \"L0\",\n\t\"price\": 900\n}\n"
+				},
+				"url": {
+					"raw": "{{url}}/item/18",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"item",
+						"18"
+					]
+				},
+				"description": "Get a single item by id."
+			},
+			"response": []
+		},
+		{
+			"name": "Get all active Items",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e849fd1f-f905-4f73-a68b-84dfbe97d620",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}/",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Get all items stored in DB"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d735b632-eed7-4b9e-9453-2301fb4eb6f7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1b7eac55-98c4-4cf8-9f01-88af1175901e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a3e35e5e-aebe-4d57-a5b9-d733d2d8ea7a",
+			"key": "url",
+			"value": "localhost:9999",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
