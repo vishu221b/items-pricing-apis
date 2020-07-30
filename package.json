@@ -1,0 +1,16 @@
+{
+  "name": "express-rest-apis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"This is a test\""
+  },
+  "author": "vishu221b",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.1.1",
+    "pg": "^8.3.0"
+  }
+}
